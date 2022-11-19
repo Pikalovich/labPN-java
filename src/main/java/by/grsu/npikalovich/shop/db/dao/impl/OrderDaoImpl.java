@@ -114,3 +114,5 @@ public class OrderDaoImpl extends AbstractDao implements IDao<Integer, Order> {
 		return entity;
 	}
 }
+
+Nygno ydalit
