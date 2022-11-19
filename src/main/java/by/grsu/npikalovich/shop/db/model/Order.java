@@ -30,8 +30,8 @@ public class Order {
 		public String getDeliveryAdressId() {
 			return deliveryAdressId;
 		}
-		public void setDeliveryAdressId(String deliveryAdressId) {
-			this.deliveryAdressId = deliveryAdressId;
+		public void setDeliveryAdressId(String newDeliveryAdressId) {
+			this.deliveryAdressId = newDeliveryAdressId;
 		}
 		public Integer getCount() {
 			return count;

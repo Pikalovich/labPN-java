@@ -94,3 +94,4 @@ public class ClientDaoTest extends AbstractTest {
 		Assertions.assertEquals(expectedCount, dao.getAll().size());
 	}
 }
+
