@@ -1,19 +1,18 @@
-package by.grsu.npikalovich.shop.db.model;
+package by.grsu.npikalovich.shop.web.dto;
 
-public class Client {
+import java.sql.Timestamp;
+
+public class ClientDto {
 
 	private Integer id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private Integer time;
+	private String name;
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -48,9 +47,16 @@ public class Client {
 		this.time = time;
 	}
 
-	@Override
-	public String toString() {
-		return "Client [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", time=" + time + "]";
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 }

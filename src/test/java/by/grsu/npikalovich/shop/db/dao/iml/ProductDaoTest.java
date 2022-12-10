@@ -28,28 +28,16 @@ public class ProductDaoTest extends AbstractTest {
 		entity.setDescription("description");
 		dao.insert(entity);
 
-		String newTitle = "TITLE_NEW";
-		entity.setTitle("title");
-		entity.setPrice(80);
-		entity.setDescription("description");
-		dao.update(entity);
-		
-		String newDescription = "DESCRIPTION_NEW";
-		entity.setTitle("title");
-		entity.setPrice(80);
-		entity.setDescription("description");
-		dao.update(entity);
-
-		Integer newPrice = 80;
-		entity.setTitle("title");
-		entity.setPrice(80);
-		entity.setDescription("description");
+		entity.setTitle("TITLE_NEW");
+		entity.setPrice(100);
+		entity.setDescription("DESCRIPTION_NEW");
 		dao.update(entity);
 
 		
 		Product updatedEntity = dao.getById(entity.getId());
-		Assertions.assertEquals(newTitle, updatedEntity.getTitle());
-		Assertions.assertNotEquals(updatedEntity.getPrice(), updatedEntity.getDescription());
+		Assertions.assertEquals("TITLE_NEW", updatedEntity.getTitle());
+		Assertions.assertEquals("DESCRIPTION_NEW", updatedEntity.getDescription());
+		Assertions.assertEquals(100, updatedEntity.getPrice());
 	}
 
 	@Test

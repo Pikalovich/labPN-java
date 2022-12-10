@@ -1,8 +1,8 @@
 CREATE TABLE order_object (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	client_id INTEGER REFERENCES  client(id),
+	client_id INTEGER NOT NULL REFERENCES  client(id),
 	product_id INTEGER NOT NULL REFERENCES product(id),
-	delivery_address_id VARCHAR REFERENCES address(id),
+	delivery_address_id INTEGER NOT NULL REFERENCES address(id),
 	cnt INTEGER NOT NULL,
 	price INTEGER NOT NULL
 );

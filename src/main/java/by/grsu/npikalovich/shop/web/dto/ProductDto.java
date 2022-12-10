@@ -1,17 +1,17 @@
-package by.grsu.npikalovich.shop.db.model;
+package by.grsu.npikalovich.shop.web.dto;
 
-public class Product {
+import java.sql.Timestamp;
+
+public class ProductDto {
+
 	private Integer id;
 	private String title;
+	private String name;
 	private Integer price;
 	private String description;
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
@@ -20,6 +20,14 @@ public class Product {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Integer getPrice() {
@@ -38,9 +46,8 @@ public class Product {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "product [id=" + id + ", title=" + title + ", price=" + price + ", description=" + description + "]";
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

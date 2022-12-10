@@ -1,18 +1,18 @@
-package by.grsu.npikalovich.shop.db.model;
+package by.grsu.npikalovich.shop.web.dto;
 
-public class Address {
+import java.sql.Timestamp;
+
+public class AddressDto {
 	private Integer id;
 	private String town;
 	private Integer house;
 	private Integer flat;
 	private String street;
+	private String name;
 
 	public Integer getId() {
 		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getTown() {
@@ -47,10 +47,16 @@ public class Address {
 		this.street = street;
 	}
 
-	@Override
-	public String toString() {
-		return "adress [id=" + id + ", town=" + town + ", house=" + house + ", flat=" + flat + ", street=" + street
-				+ "]";
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
