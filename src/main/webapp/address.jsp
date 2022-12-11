@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <c:set var="pageTitle" value="address list" scope="application" />
-
+<c:set var="pageUrl" value="/address" scope="page" />
 <t:wrapper>
 	<h1>Адрес</h1>
 	<div class="row">
@@ -16,12 +17,11 @@
 	<table>
 		<thead>
 			<tr>
-				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
-				<th>Город</th> <!-- can also be sortable but requires more complex SQL statement -->
+			<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">DB ID</mytaglib:sort-link></th>
+				<th>Город</th>
 				<th>Улица</th>
-				<th>Дом</th> <!-- can also be sortable but requires more complex SQL statement -->
-				<th>Квартира</th>
-				
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="house">Дом</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="flat">Квартира</mytaglib:sort-link></th>
 			</tr>
 		</thead>
 		
@@ -39,4 +39,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<t:paging/>
 </t:wrapper>

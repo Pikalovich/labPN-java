@@ -18,8 +18,9 @@ import by.grsu.npikalovich.shop.db.dao.impl.ClientDaoImpl;
 import by.grsu.npikalovich.shop.db.model.Client;
 import by.grsu.npikalovich.shop.web.ValidationUtils;
 import by.grsu.npikalovich.shop.web.dto.ClientDto;
+import by.grsu.npikalovich.shop.web.dto.TableStateDto;
 
-public class ClientServlet extends HttpServlet {
+public class ClientServlet extends AbstractListServlet {
 	private static final IDao<Integer, Client> clientDao = ClientDaoImpl.INSTANCE;
 
 	@Override
@@ -34,7 +35,11 @@ public class ClientServlet extends HttpServlet {
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Client> orders = clientDao.getAll(); // get data
+		int totalClients = clientDao.count(); // get count of ALL items
+
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalClients); 
+
+		List<Client> orders = clientDao.find(tableStateDto);
 		List<ClientDto> dtos = orders.stream().map((entity) -> {
 			ClientDto dto = new ClientDto();
 			// copy necessary fields as-is

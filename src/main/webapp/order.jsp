@@ -2,10 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <c:set var="pageTitle" value="order list" scope="application" />
-
+<c:set var="pageUrl" value="/order" scope="page" />
 <t:wrapper>
-	<h1>Заказы</h1>
+		<h1>Заказ</h1>
 	<div class="row">
 		<div class="col s12">
 			<div class="center-align">
@@ -16,14 +17,12 @@
 	<table>
 		<thead>
 			<tr>
-				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
-					<th><mytaglib:sort-link pageUrl="${pageUrl}" column="ClientId">Client ID</mytaglib:sort-link></th>
-						<th><mytaglib:sort-link pageUrl="${pageUrl}" column="productId">Product ID</mytaglib:sort-link></th>
-						<th><mytaglib:sort-link pageUrl="${pageUrl}" column="deliveryAddressId">Address ID</mytaglib:sort-link></th>
-				<th>Количество</th> <!-- can also be sortable but requires more complex SQL statement -->
+			<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">ID</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="client_id">Client ID</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="product_id">Product ID</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="delivery_address_id">Address ID</mytaglib:sort-link></th>
+				<th>Количество</th> 
 				<th>Цена</th>
-				
-			</tr>
 		</thead>
 		
 		<tbody>
@@ -41,4 +40,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<t:paging />
 </t:wrapper>

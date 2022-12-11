@@ -9,10 +9,10 @@ import javax.servlet.ServletContextListener;
 
 import by.grsu.npikalovich.shop.db.dao.AbstractDao;
 import by.grsu.npikalovich.shop.db.dao.IDao;
-import by.grsu.npikalovich.shop.db.dao.impl.ProductDaoImpl;
 import by.grsu.npikalovich.shop.db.dao.impl.ClientDaoImpl;
 import by.grsu.npikalovich.shop.db.dao.impl.OrderDaoImpl;
 import by.grsu.npikalovich.shop.db.dao.impl.AddressDaoImpl;
+import by.grsu.npikalovich.shop.db.dao.impl.ProductDaoImpl;
 import by.grsu.npikalovich.shop.db.model.Product;
 import by.grsu.npikalovich.shop.db.model.Client;
 import by.grsu.npikalovich.shop.db.model.Order;

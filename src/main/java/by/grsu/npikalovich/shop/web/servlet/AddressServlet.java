@@ -18,8 +18,9 @@ import by.grsu.npikalovich.shop.db.dao.impl.AddressDaoImpl;
 import by.grsu.npikalovich.shop.db.model.Address;
 import by.grsu.npikalovich.shop.web.ValidationUtils;
 import by.grsu.npikalovich.shop.web.dto.AddressDto;
+import by.grsu.npikalovich.shop.web.dto.TableStateDto;
 
-public class AddressServlet extends HttpServlet {
+public class AddressServlet extends AbstractListServlet {
 	private static final IDao<Integer, Address> addressDao = AddressDaoImpl.INSTANCE;
 
 	@Override
@@ -34,7 +35,11 @@ public class AddressServlet extends HttpServlet {
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Address> orders = addressDao.getAll(); // get data
+			int totalAddresses = addressDao.count(); // get count of ALL items
+			final TableStateDto tableStateDto = resolveTableStateDto(req, totalAddresses);
+		
+
+		List<Address> orders = addressDao.find(tableStateDto);  // get data
 		List<AddressDto> dtos = orders.stream().map((entity) -> {
 			AddressDto dto = new AddressDto();
 			dto.setId(entity.getId());

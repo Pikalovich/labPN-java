@@ -15,11 +15,13 @@ import com.google.common.base.Strings;
 
 import by.grsu.npikalovich.shop.db.dao.IDao;
 import by.grsu.npikalovich.shop.db.dao.impl.ProductDaoImpl;
+import by.grsu.npikalovich.shop.db.model.Address;
 import by.grsu.npikalovich.shop.db.model.Product;
 import by.grsu.npikalovich.shop.web.dto.ProductDto;
+import by.grsu.npikalovich.shop.web.dto.TableStateDto;
 import by.grsu.npikalovich.shop.web.ValidationUtils;
 
-public class ProductServlet extends HttpServlet {
+public class ProductServlet extends AbstractListServlet {
 	private static final IDao<Integer, Product> productDao = ProductDaoImpl.INSTANCE;
 
 	@Override
@@ -34,7 +36,9 @@ public class ProductServlet extends HttpServlet {
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Product> orders = productDao.getAll(); // get data
+		int totalProducts = productDao.count(); // get count of ALL items
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalProducts);
+		List<Product> orders = productDao.find(tableStateDto); // get data
 		List<ProductDto> dtos = orders.stream().map((entity) -> {
 			ProductDto dto = new ProductDto();
 			// copy necessary fields as-is

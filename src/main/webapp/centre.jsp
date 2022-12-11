@@ -26,4 +26,5 @@
 			</div>
 			</div>
 		</div>
+		<t:paging/>
 </t:wrapper>

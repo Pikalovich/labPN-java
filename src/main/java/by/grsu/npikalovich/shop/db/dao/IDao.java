@@ -2,8 +2,10 @@ package by.grsu.npikalovich.shop.db.dao;
 
 import java.util.List;
 
+import by.grsu.npikalovich.shop.web.dto.TableStateDto;
+
 public interface IDao<ID, TYPE> {
-	void insert(TYPE t);
+	void insert(TYPE t) ;
 
 	void update(TYPE t);
 
@@ -12,4 +14,8 @@ public interface IDao<ID, TYPE> {
 	TYPE getById(ID id);
 
 	List<TYPE> getAll();
+	
+	List<TYPE> find(TableStateDto tableStateDto);
+
+	int count();
 }

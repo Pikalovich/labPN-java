@@ -24,11 +24,12 @@ import by.grsu.npikalovich.shop.db.model.Address;
 import by.grsu.npikalovich.shop.db.model.Product;
 import by.grsu.npikalovich.shop.web.dto.ClientDto;
 import by.grsu.npikalovich.shop.web.dto.ProductDto;
+import by.grsu.npikalovich.shop.web.dto.TableStateDto;
 import by.grsu.npikalovich.shop.web.dto.OrderDto;
 import by.grsu.npikalovich.shop.web.ValidationUtils;
 import by.grsu.npikalovich.shop.web.dto.AddressDto;
 
-public class OrderServlet extends HttpServlet {
+public class OrderServlet extends AbstractListServlet {
 	private static final IDao<Integer, Order> orderDao = OrderDaoImpl.INSTANCE;
 	private static final IDao<Integer, Client> clientDao = ClientDaoImpl.INSTANCE;
 	private static final IDao<Integer, Product> productDao = ProductDaoImpl.INSTANCE;
@@ -47,8 +48,9 @@ public class OrderServlet extends HttpServlet {
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Order> orders = orderDao.getAll(); // get data
-
+		int totalOrders = orderDao.count(); 
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalOrders);
+		List<Order> orders = orderDao.find(tableStateDto);
 		List<OrderDto> dtos = orders.stream().map((entity) -> {
 			OrderDto dto = new OrderDto();
 			// copy necessary fields as-is

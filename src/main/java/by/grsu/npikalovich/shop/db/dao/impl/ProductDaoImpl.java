@@ -9,7 +9,10 @@ import java.util.List;
 
 import by.grsu.npikalovich.shop.db.dao.AbstractDao;
 import by.grsu.npikalovich.shop.db.dao.IDao;
+import by.grsu.npikalovich.shop.db.model.Address;
 import by.grsu.npikalovich.shop.db.model.Product;
+import by.grsu.npikalovich.shop.web.dto.SortDto;
+import by.grsu.npikalovich.shop.web.dto.TableStateDto;
 
 public class ProductDaoImpl extends AbstractDao implements IDao<Integer, Product> {
 
@@ -106,6 +109,44 @@ public class ProductDaoImpl extends AbstractDao implements IDao<Integer, Product
 		entity.setPrice(rs.getInt("price"));
 		entity.setDescription(rs.getString("description"));
 		return entity;
+	}
+
+	@Override
+	public List<Product> find(TableStateDto tableStateDto) {
+		List<Product> entitiesList = new ArrayList<>();
+		try (Connection c = createConnection()) {
+			StringBuilder sql = new StringBuilder("select * from product");
+
+			final SortDto sortDto = tableStateDto.getSort();
+			if (sortDto != null) {
+				sql.append(String.format(" order by %s %s", sortDto.getColumn(), resolveSortOrder(sortDto)));
+			}
+
+			sql.append(" limit " + tableStateDto.getItemsPerPage());
+			sql.append(" offset " + resolveOffset(tableStateDto));
+
+			System.out.println("searching Cars using SQL: " + sql);
+			ResultSet rs = c.createStatement().executeQuery(sql.toString());
+			while (rs.next()) {
+				Product entity = rowToEntity(rs);
+				entitiesList.add(entity);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("can't select Product entities", e);
+		}
+		return entitiesList;
+	}
+
+	@Override
+	public int count() {
+		try (Connection c = createConnection()) {
+			PreparedStatement pstmt = c.prepareStatement("select count(*) as c from product");
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("c");
+		} catch (SQLException e) {
+			throw new RuntimeException("can't get cars count", e);
+		}
 	}
 
 }
